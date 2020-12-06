@@ -1,21 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const mountRoutes = require("./routes");
 
 const app = express();
 
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Routes
-const universityRouter = require('./routes/university');
-app.use("/university", universityRouter);
-
-
-app.get("/", (req, res) => {
-  console.log(req);
-  res.json({ key: "value" });
-});
+mountRoutes(app);
 
 const PORT = process.env.PORT || 3000;
 
