@@ -22,6 +22,7 @@
     RMCDATABASE=rmc
     ```
 - Create the database (same name as .env's RMCDATABASE):
+    
     `node node_modules/db-migrate/bin/db-migrate db:create rmc`
     - To delete the database:
     `node node_modules/db-migrate/bin/db-migrate db:drop rmc`
