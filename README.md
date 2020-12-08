@@ -11,6 +11,7 @@
 - Clone the repository 
 - Run `npm i` to install all the required packages.
 - In the main directory of the project create a **.env** file with this content:
+    - Make sure you enter your password for PGPASSWORD in the .env
     ```
     PORT=3000
     PGHOST=localhost
