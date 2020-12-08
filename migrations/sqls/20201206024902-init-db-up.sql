@@ -116,10 +116,10 @@ VALUES (3, 'Computer Science', 2);
 
 -- Courses
 INSERT INTO course (id, code, department_id, subject)
-VALUES (1, 'CPSC 471', 1, 'Computer Science');
+VALUES (1, 'CPSC 471', 1, 'Databases');
 
 INSERT INTO course (id, code, department_id, subject)
-VALUES (2, 'CPSC 453', 1, 'Computer Science');
+VALUES (2, 'CPSC 453', 1, 'Graphcs');
 
 -- App Users
 INSERT INTO app_user (id, username, email, password)
@@ -204,10 +204,10 @@ VALUES (2, 2, 'not appropriate Harry!!', 'I think you have some explaining to do
 
 -- Course Requests
 INSERT INTO course_request (id, code, student_id, subject)
-VALUES (1, 'CPSC 999', 1, 'Computer Science');
+VALUES (1, 'CPSC 999', 1, 'Quantum Computing');
 
 INSERT INTO course_request (id, code, student_id, subject)
-VALUES (2, 'CPSC 901', 1, 'Computer Science');
+VALUES (2, 'CPSC 901', 1, 'Super Computing');
 
 INSERT INTO course_request (id, code, student_id, subject)
-VALUES (3, 'MATH 888', 2, 'Math');
+VALUES (3, 'MATH 888', 2, 'Math Makes Sense');
