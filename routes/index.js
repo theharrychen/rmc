@@ -3,6 +3,7 @@ const department = require("./department");
 const course = require("./course");
 const review = require("./review");
 const student = require("./student");
+const admin = require("./admin");
 const universityRating = require("./universityRating");
 
 module.exports = (app) => {
@@ -11,5 +12,6 @@ module.exports = (app) => {
   app.use("/course", course);
   app.use("/review", review);
   app.use("/student", student);
+  app.use("/admin", admin);
   app.use("/university-rating", universityRating);
 };

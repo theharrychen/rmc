@@ -8,8 +8,8 @@ const router = new Router();
 router.get("/", async (req, res) => {
   try {
     const text =
-      "SELECT S.id AS student_id, U.id AS user_id, university_id, username, email, password " +
-      "FROM student AS S, app_user AS U WHERE S.user_id = U.id;";
+      "SELECT A.id AS admin_id, U.id AS user_id, username, email, password " +
+      "FROM admin AS A, app_user AS U WHERE A.user_id = U.id;";
     const { rows } = await db.query(text);
     res.json(rows);
   } catch (error) {
@@ -19,19 +19,14 @@ router.get("/", async (req, res) => {
 });
 
 // Getting One
-router.get("/:username", getStudent, async (req, res) => {
-  res.send(res.student);
+router.get("/:username", getAdmin, async (req, res) => {
+  res.send(res.admin);
 });
 
-// Registering a student
+// Registering an admin
 router.post("/", async (req, res) => {
-  if (
-    req.body.username &&
-    req.body.email &&
-    req.body.password &&
-    req.body.universityId
-  ) {
-    const { username, email, password, universityId } = req.body;
+  if (req.body.username && req.body.email && req.body.password) {
+    const { username, email, password } = req.body;
 
     try {
       // Hashing and salting the password
@@ -50,16 +45,13 @@ router.post("/", async (req, res) => {
         [username.toLowerCase(), email.toLowerCase(), hashedPassword]
       );
 
-      // Create a student record with the user_id from the app_user record
+      // Create an admin record with the user_id from the app_user record
       const userId = userRows[0].id;
-      await db.query(
-        "INSERT INTO student (user_id, university_id) VALUES ($1,$2);",
-        [userId, universityId]
-      );
+      await db.query("INSERT INTO admin (user_id) VALUES ($1);", [userId]);
 
       const text =
-        "SELECT S.id AS student_id, U.id AS user_id, university_id, username, email, password " +
-        "FROM student AS S, app_user AS U WHERE S.user_id = U.id AND U.username = $1;";
+        "SELECT A.id AS admin_id, U.id AS user_id, username, email, password " +
+        "FROM admin AS A, app_user AS U WHERE A.user_id = U.id AND U.username = $1;";
       const { rows } = await db.query(text, [userRows[0].username]);
 
       res.status(201).json(rows[0]); // Successfully created record
@@ -68,29 +60,29 @@ router.post("/", async (req, res) => {
       res.status(400).json({ message: error.message }); // Bad request from client
     }
   } else {
-    res.status(400).json({
-      message: "JSON body needs username, email, password, universityId.",
-    }); // Bad request from client
+    res
+      .status(400)
+      .json({ message: "JSON body needs username, email, password." }); // Bad request from client
   }
 });
 
-// Logging in a student
+// Logging in a admin
 router.post("/login", async (req, res) => {
   if (req.body.username && req.body.password) {
     try {
-      // Find the student
+      // Find the admin
       const text =
         "SELECT password " +
-        "FROM student AS S, app_user AS U WHERE S.user_id = U.id AND U.username = $1;";
+        "FROM admin AS A, app_user AS U WHERE A.user_id = U.id AND U.username = $1;";
       const { rows, rowCount } = await db.query(text, [
         req.body.username.toLowerCase(),
       ]);
 
       if (rowCount > 0) {
-        let student = rows[0];
+        let admin = rows[0];
         //Check if the password is correct
         try {
-          if (await bcrypt.compare(req.body.password, student.password)) {
+          if (await bcrypt.compare(req.body.password, admin.password)) {
             res.send("Successful login!");
           } else {
             res.send("Wrong password!");
@@ -99,7 +91,7 @@ router.post("/login", async (req, res) => {
           res.status(500).send({ message: err.message }); // Interal server error
         }
       } else {
-        return res.status(404).json({ message: "Cannot find student" }); // Resource not found
+        return res.status(404).json({ message: "Cannot find admin" }); // Resource not found
       }
     } catch (error) {
       res.status(404).json({ message: error.message });
@@ -109,44 +101,42 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// // Deleting One
-router.delete("/:username", getStudent, async (req, res) => {
+// Deleting One
+router.delete("/:username", getAdmin, async (req, res) => {
   try {
-    await db.query("DELETE FROM student WHERE id = $1", [
-      res.student.student_id,
-    ]);
-    await db.query("DELETE FROM app_user WHERE id = $1", [res.student.user_id]);
+    await db.query("DELETE FROM admin WHERE id = $1", [res.admin.admin_id]);
+    await db.query("DELETE FROM app_user WHERE id = $1", [res.admin.user_id]);
 
-    res.json({ message: "Successfully deleted the student." });
+    res.json({ message: "Successfully deleted the admin." });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: error.message }); // INternal server error
+    res.status(500).json({ message: error.message }); // Internal server error
   }
 });
 
-// Middleware function to get resource by id
-// Called by all "/:username" routes
-async function getStudent(req, res, next) {
+// // Middleware function to get resource by id
+// // Called by all "/:username" routes
+async function getAdmin(req, res, next) {
   const { username } = req.params;
-  let student;
+  let admin;
 
   try {
     const text =
-      "SELECT S.id AS student_id, U.id AS user_id, university_id, username, email, password " +
-      "FROM student AS S, app_user AS U WHERE S.user_id = U.id AND U.username = $1;";
+      "SELECT A.id AS admin_id, U.id AS user_id, username, email, password " +
+      "FROM admin AS A, app_user AS U WHERE A.user_id = U.id AND U.username = $1;";
     const { rows, rowCount } = await db.query(text, [username.toLowerCase()]);
 
     if (rowCount > 0) {
-      student = rows[0];
+      admin = rows[0];
     } else {
-      return res.status(404).json({ message: "Cannot find student" }); // Resource not found
+      return res.status(404).json({ message: "Cannot find admin" }); // Resource not found
     }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message }); // Internal server error
   }
 
-  res.student = student;
+  res.admin = admin;
   next(); // Moves to next middleware code
 }
 
