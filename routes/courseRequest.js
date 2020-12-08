@@ -17,7 +17,11 @@ router.get("/", async (req, res) => {
 // Getting All From A Student
 router.get("/:student_id", async (req, res) => {
   try {
-    const { rows } = await db.query("SELECT * FROM course_request WHERE student_id = $1", [req.params.student_id]);
+    const {
+      rows,
+    } = await db.query("SELECT * FROM course_request WHERE student_id = $1", [
+      req.params.student_id,
+    ]);
     res.json(rows);
   } catch (error) {
     console.log(error);
@@ -42,30 +46,89 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Middleware function to get resource by id
-// Called by all "/:id" routes
-async function getCourseRequest(req, res, next) {
-    const { id } = req.params;
-    let course_request;
-  
+router.post("/approve", async (req, res) => {
+  if (
+    req.body.courseRequestId &&
+    req.body.code &&
+    req.body.departmentId &&
+    req.body.subject &&
+    req.body.adminId
+  ) {
     try {
       const {
-        rows,
-        rowCount,
-      } = await db.query("SELECT * FROM course_request WHERE id = $1", [id]);
-  
-      if (rowCount > 0) {
-        course_request = rows[0];
-      } else {
-        return res.status(404).json({ message: "Cannot find course_request" }); // Resource not found
-      }
+        courseRequestId,
+        code,
+        departmentId,
+        subject,
+        adminId,
+      } = req.body;
+
+      await db.query("DELETE FROM course_request WHERE id = $1;", [
+        courseRequestId,
+      ]);
+
+      const createCourse =
+        "INSERT INTO course (code, department_id, subject) VALUES ($1, $2, $3) RETURNING *;";
+      const { rows: courseRows } = await db.query(createCourse, [
+        code,
+        departmentId,
+        subject,
+      ]);
+
+      const course = courseRows[0];
+      const courseId = course.id;
+
+      const createApprove =
+        "INSERT INTO approve (course_id, admin_id) VALUES ($1, $2) RETURNING *;";
+      const { rows: approveRows } = await db.query(createApprove, [
+        courseId,
+        adminId,
+      ]);
+
+      res.status(201).json([course, approveRows[0]]);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: error.message }); // Internal server error
     }
-  
-    res.course_request = course_request;
-    next(); // Moves to next middleware code
+  } else {
+    res.status(400).send("The JSON body is missing key-values."); // Bad request from client
   }
-  
-  module.exports = router;
+});
+
+router.delete("/:id", getCourseRequest, async (req, res) => {
+  try {
+    await db.query("DELETE FROM course_request WHERE id = $1", [req.params.id]);
+    res.json({ message: "Successfully rejected and deleted the university." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Middleware function to get resource by id
+// Called by all "/:id" routes
+async function getCourseRequest(req, res, next) {
+  const { id } = req.params;
+  let course_request;
+
+  try {
+    const {
+      rows,
+      rowCount,
+    } = await db.query("SELECT * FROM course_request WHERE id = $1", [id]);
+
+    if (rowCount > 0) {
+      course_request = rows[0];
+    } else {
+      return res.status(404).json({ message: "Cannot find course_request" }); // Resource not found
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message }); // Internal server error
+  }
+
+  res.course_request = course_request;
+  next(); // Moves to next middleware code
+}
+
+module.exports = router;
