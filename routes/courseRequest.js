@@ -98,7 +98,7 @@ router.post("/approve", async (req, res) => {
 router.delete("/:id", getCourseRequest, async (req, res) => {
   try {
     await db.query("DELETE FROM course_request WHERE id = $1", [req.params.id]);
-    res.json({ message: "Successfully rejected and deleted the university." });
+    res.json({ message: "Successfully rejected and deleted the course request." });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
