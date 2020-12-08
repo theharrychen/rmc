@@ -112,3 +112,9 @@ VALUES (2, 'Math', 1);
 
 INSERT INTO department (id, field, university_id)
 VALUES (3, 'Computer Science', 2);
+
+INSERT INTO course (id, code, department_id, subject)
+VALUES (1, 'CPSC 471', 1, 'Computer Science');
+
+INSERT INTO course (id, code, department_id, subject)
+VALUES (2, 'CPSC 453', 1, 'Computer Science');
