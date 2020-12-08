@@ -58,17 +58,6 @@ router.put("/:id", getReview, async (req, res) => {
   }
 });
 
-// Deleting One
-router.delete("/:id", getReview, async (req, res) => {
-  try {
-    await db.query("DELETE FROM review WHERE id = $1", [req.params.id]);
-    res.json({ message: "Successfully deleted the review." });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
 // Middleware function to get resource by id
 // Called by all "/:id" routes
 async function getReview(req, res, next) {

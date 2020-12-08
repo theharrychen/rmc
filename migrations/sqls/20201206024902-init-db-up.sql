@@ -187,3 +187,10 @@ VALUES (3, 1, 2, 1, 'General Kenobi?', 1, 'hello there');
 
 INSERT INTO review (id, course_id, student_id, rating, professor, difficulty, comments)
 VALUES (4, 2, 1, 3, 'Run of the mill professor', 3, 'dis course aight');
+
+-- University Ratings
+INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
+VALUES (1, 1, 1, 'comment', 1, 1, 1);
+
+INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
+VALUES (2, 2, 10, 'comment2', 2, 2, 2);
