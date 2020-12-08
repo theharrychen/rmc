@@ -104,6 +104,7 @@ VALUES (1, 'University of Calgary', 'Canada', 'Alberta', 'Calgary', 'https://www
 INSERT INTO university (id, name, country, province, city, website) 
 VALUES (2, 'MIT', 'USA', 'Massachusetts', 'Cambridge', 'https://www.mit.edu/');
 
+-- Departments
 INSERT INTO department (id, field, university_id)
 VALUES (1, 'Computer Science', 1);
 
@@ -113,8 +114,66 @@ VALUES (2, 'Math', 1);
 INSERT INTO department (id, field, university_id)
 VALUES (3, 'Computer Science', 2);
 
+-- Courses
 INSERT INTO course (id, code, department_id, subject)
 VALUES (1, 'CPSC 471', 1, 'Computer Science');
 
 INSERT INTO course (id, code, department_id, subject)
 VALUES (2, 'CPSC 453', 1, 'Computer Science');
+
+
+
+
+-- App Users
+INSERT INTO app_user (id, username, email, password)
+VALUES (1, 'harry', 'harry@rmc.ca', 'strongpassword'); -- Admin
+INSERT INTO app_user (id, username, email, password)
+VALUES (2, 'jesse', 'jesse@rmc.ca', 'strongpassword'); -- Admin
+INSERT INTO app_user (id, username, email, password)
+VALUES (3, 'billy', 'billy@ucalgary.ca', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (4, 'amy', 'amy@ucalgary.ca', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (5, 'carl', 'carl@ucalgary.ca', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (6, 'juan', 'juan@ucalgary.ca', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (7, 'emily', 'emily@mit.edu', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (8, 'chris', 'chris@mit.edu', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (9, 'kyle', 'kyle@mit.edu', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (10, 'stephanie', 'stephanie@mit.edu', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (11, 'ellie', 'ellie@mit.edu', 'strongpassword');
+INSERT INTO app_user (id, username, email, password)
+VALUES (12, 'joel', 'joel@mit.edu', 'strongpassword');
+
+-- Students
+INSERT INTO student (id, user_id, university_id)
+VALUES (1, 3, 1);
+INSERT INTO student (id, user_id, university_id)
+VALUES (2, 4, 1);
+INSERT INTO student (id, user_id, university_id)
+VALUES (3, 5, 1);
+INSERT INTO student (id, user_id, university_id)
+VALUES (4, 6, 1);
+INSERT INTO student (id, user_id, university_id)
+VALUES (5, 7, 2);
+INSERT INTO student (id, user_id, university_id)
+VALUES (6, 8, 2);
+INSERT INTO student (id, user_id, university_id)
+VALUES (7, 9, 2);
+INSERT INTO student (id, user_id, university_id)
+VALUES (8, 10, 2);
+INSERT INTO student (id, user_id, university_id)
+VALUES (9, 11, 2);
+INSERT INTO student (id, user_id, university_id)
+VALUES (10, 12, 2);
+
+-- Admins
+INSERT INTO admin (id, user_id)
+VALUES (1, 1);
+INSERT INTO admin (id, user_id)
+VALUES (2, 2);
