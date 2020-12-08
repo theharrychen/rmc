@@ -201,3 +201,13 @@ VALUES (1, 1, 'tits', 'nough said');
 
 INSERT INTO news_post (id, admin_id, title, body)
 VALUES (2, 2, 'not appropriate Harry!!', 'I think you have some explaining to do');
+
+-- Course Requests
+INSERT INTO course_request (id, code, student_id, subject)
+VALUES (1, 'CPSC 999', 1, 'Computer Science');
+
+INSERT INTO course_request (id, code, student_id, subject)
+VALUES (2, 'CPSC 901', 1, 'Computer Science');
+
+INSERT INTO course_request (id, code, student_id, subject)
+VALUES (3, 'MATH 888', 2, 'Math');

@@ -5,6 +5,7 @@ const review = require("./review");
 const student = require("./student");
 const universityRating = require("./universityRating");
 const newsPost = require("./newsPost");
+const courseRequest = require("./courseRequest");
 
 module.exports = (app) => {
   app.use("/university", university);
@@ -14,4 +15,5 @@ module.exports = (app) => {
   app.use("/student", student);
   app.use("/university-rating", universityRating);
   app.use("/news-post", newsPost);
+  app.use("/course-request", courseRequest);
 };
