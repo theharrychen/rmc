@@ -103,3 +103,12 @@ VALUES (1, 'University of Calgary', 'Canada', 'Alberta', 'Calgary', 'https://www
 
 INSERT INTO university (id, name, country, province, city, website) 
 VALUES (2, 'MIT', 'USA', 'Massachusetts', 'Cambridge', 'https://www.mit.edu/');
+
+INSERT INTO department (id, field, university_id)
+VALUES (1, 'Computer Science', 1);
+
+INSERT INTO department (id, field, university_id)
+VALUES (2, 'Math', 1);
+
+INSERT INTO department (id, field, university_id)
+VALUES (3, 'Computer Science', 2);
