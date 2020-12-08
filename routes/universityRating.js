@@ -4,7 +4,7 @@ const db = require("../db");
 const router = new Router();
 
 // Getting All
-router.get("/:university_id", async (req, res) => {
+router.get("/university/:university_id", async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM university_rating WHERE university_id = $1", [req.params.university_id]);
     res.json(rows);
