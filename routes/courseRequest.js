@@ -27,11 +27,11 @@ router.get("/:student_id", async (req, res) => {
 
 // Creating One
 router.post("/", async (req, res) => {
-  const { code, student_id, subject } = req.body;
+  const { code, student_id, department_id, subject } = req.body;
 
   const text =
-    "INSERT INTO course_request (code, student_id, subject) VALUES ($1,$2,$3) RETURNING *;";
-  const values = [code, student_id, subject];
+    "INSERT INTO course_request (code, student_id, department_id, subject) VALUES ($1,$2,$3,$4) RETURNING *;";
+  const values = [code, student_id, department_id, subject];
 
   try {
     const { rows } = await db.query(text, values);
