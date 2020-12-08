@@ -194,3 +194,10 @@ VALUES (1, 1, 1, 'comment', 1, 1, 1);
 
 INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
 VALUES (2, 2, 10, 'comment2', 2, 2, 2);
+
+-- News Posts
+INSERT INTO news_post (id, admin_id, title, body)
+VALUES (1, 1, 'tits', 'nough said');
+
+INSERT INTO news_post (id, admin_id, title, body)
+VALUES (2, 2, 'not appropriate Harry!!', 'I think you have some explaining to do');
