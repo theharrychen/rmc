@@ -23,13 +23,13 @@
     ```
 - Create the database (same name as .env's RMCDATABASE):
     
-    `npx db:create rmc`
+    `npx db-migrate db:create rmc`
     - To delete the database:
-    `npx db:drop rmc`
+    `npx db-migrate db:drop rmc`
 - Setup and seed the database:
-	`npx up -e rmc`
+	`npx db-migrate up -e rmc`
 	- To undo the seeding:
-		`npx down -e rmc`
+		`npx db-migrate down -e rmc`
 - For development purposes, run: `npx nodemon`
 -  Otherwise, run: `node app.js`
 
