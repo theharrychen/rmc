@@ -23,14 +23,14 @@
     ```
 - Create the database (same name as .env's RMCDATABASE):
     
-    `node node_modules/db-migrate/bin/db-migrate db:create rmc`
+    `npx db:create rmc`
     - To delete the database:
-    `node node_modules/db-migrate/bin/db-migrate db:drop rmc`
+    `npx db:drop rmc`
 - Setup and seed the database:
-	`node node_modules/db-migrate/bin/db-migrate up -e rmc`
+	`npx up -e rmc`
 	- To undo the seeding:
-		`node node_modules/db-migrate/bin/db-migrate down -e rmc`
-- For development, run: `nodemon`
+		`npx down -e rmc`
+- For development purposes, run: `npx nodemon`
 -  Otherwise, run: `node app.js`
 
 - To directly query the database, open pgAdmin and login and connect to your local PostgreSQL server.

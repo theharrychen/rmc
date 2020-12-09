@@ -119,10 +119,10 @@ VALUES (3, 'Computer Science', 2);
 
 -- Courses
 INSERT INTO course (id, code, department_id, subject)
-VALUES (1, 'CPSC 471', 1, 'Databases');
+VALUES (1, 'CPSC 471', 1, 'Introduction to Relational Databases');
 
 INSERT INTO course (id, code, department_id, subject)
-VALUES (2, 'CPSC 453', 1, 'Graphcs');
+VALUES (2, 'CPSC 453', 1, 'Introduction to Computer Graphics');
 
 -- App Users
 INSERT INTO app_user (id, username, email, password)
@@ -180,37 +180,43 @@ VALUES (2, 2);
 
 -- Reviews
 INSERT INTO review (id, course_id, student_id, rating, professor, difficulty, comments)
-VALUES (1, 1, 1, 1, 'Dr. Won', 1, 'uno');
+VALUES (1, 1, 1, 4.99, 'Professor Oak', 1, 'This is an incredibly useful course, databases are everywhere!!');
 
 INSERT INTO review (id, course_id, student_id, rating, professor, difficulty, comments)
-VALUES (2, 2, 2, 2, 'Dr. First Loser', 2, 'dos');
+VALUES (2, 2, 2, 2, 'Dr. Rowan', 2, 'This course went way too fast, would not recommend.');
 
 INSERT INTO review (id, course_id, student_id, rating, professor, difficulty, comments)
-VALUES (3, 1, 2, 1, 'General Kenobi?', 1, 'hello there');
+VALUES (3, 1, 2, 1, 'Dr. Doofenshmirtz', 3.4, 'Do not take this course with Dr. Doof! He always rants about a platypus.');
 
 INSERT INTO review (id, course_id, student_id, rating, professor, difficulty, comments)
-VALUES (4, 2, 1, 3, 'Run of the mill professor', 3, 'dis course aight');
+VALUES (4, 2, 1, 3, 'Dr. Eggman', 3, 'dis course aight');
 
 -- University Ratings
 INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
-VALUES (1, 1, 1, 'comment', 1, 1, 1);
+VALUES (1, 1, 1, 'Great university located in a wonderful city. Be aware that UofC is definitely a commuter campus.', 4.5, 2.5, 3.2);
 
 INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
-VALUES (2, 2, 10, 'comment2', 2, 2, 2);
+VALUES (2, 2, 10, 'MIT is a phenomenal institution! The people here are amazing, and the resources are immense.', 5, 5, 5);
+
+INSERT INTO university_rating (id, university_id, student_id, comments, safety_rating, facilities_rating, opportunities_rating)
+VALUES (3, 1, 2, 'UCalgary is a pretty mundane school to be at.', 1.5, 1.5, 1.2);
 
 -- News Posts
 INSERT INTO news_post (id, admin_id, title, body)
-VALUES (1, 1, 'tits', 'nough said');
+VALUES (1, 1, 'Rate My Course Launch!', 'We are excited to empower students with a platform for crowdsourced information with the initial release of our website!');
 
 INSERT INTO news_post (id, admin_id, title, body)
-VALUES (2, 2, 'not appropriate Harry!!', 'I think you have some explaining to do');
+VALUES (2, 2, 'Happy Holidays!', 'Merry Christmas and Happy New Year from them team at Rate My Course.');
+
+INSERT INTO news_post (id, admin_id, title, body)
+VALUES (3, 2, 'December Update v0.1', 'We have added support for more universities!');
 
 -- Course Requests
 INSERT INTO course_request (id, code, student_id, department_id, subject)
-VALUES (1, 'CPSC 999', 1, 1,  'Quantum Computing');
+VALUES (1, 'CPSC 999', 1, 1,  'Quantum Computing for Post Graduate Students');
 
 INSERT INTO course_request (id, code, student_id, department_id, subject)
-VALUES (2, 'CPSC 901', 1, 1, 'Super Computing');
+VALUES (2, 'CPSC 901', 1, 1, 'Scaling Super Computers in a Modern Data Center');
 
 INSERT INTO course_request (id, code, student_id, department_id, subject)
 VALUES (3, 'MATH 888', 2, 2, 'Math Makes Sense');
