@@ -22,7 +22,6 @@
     RMCDATABASE=rmc
     ```
 - Create the database (same name as .env's RMCDATABASE):
-    
     `npx db:create rmc`
     - To delete the database:
     `npx db:drop rmc`
