@@ -1,6 +1,8 @@
 
 # Rate My Course RESTful API
 
+[API Documentation](https://documenter.getpostman.com/view/10564062/TVmTcEfn)
+
 ## Setup and Run
 - Install [NodeJS](https://nodejs.org/en/)
 - Install [PostgreSQL with pgAdmin](https://www.postgresql.org/download/)
